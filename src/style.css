@@ -1,0 +1,17 @@
+/*
+#222222
+#161616
+#AA0000
+*/
+body {
+    background-color: #222222;
+    font-family: Verdana;
+    font-color: #FFFFFF;
+}
+
+/* The sidebar containing links to different functions */
+div.sidebar {
+    background-color: #161616;
+    position: fixed;
+    height: 100%
+}
