@@ -6,12 +6,27 @@
 body {
     background-color: #222222;
     font-family: Verdana;
-    font-color: #FFFFFF;
+    color: #FFFFFF;
 }
 
-/* The sidebar containing links to different functions */
-div.sidebar {
+input {
     background-color: #161616;
-    position: fixed;
-    height: 100%
+    color: #FFFFFF;
+    width: 300px;
+}
+
+textarea {
+    background-color: #161616;
+    color: #FFFFFF;
+    font-family: Verdana;
+}
+
+textarea.key {
+    resize: none;
+}
+
+button {
+    background-color: #AA0000;
+    color: #FFFFFF;
+    font-family: Verdana;
 }

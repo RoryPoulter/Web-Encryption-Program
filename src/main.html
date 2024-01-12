@@ -2,17 +2,20 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>Encryption</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <script type = "text/javascript" src="main.js"></script>
         <div>
             <h2>Encrypt Text</h2>
             <form id="encrypt_data">
-                Key: <input type="text"><br>
-                Text: <input type="text"><br>
+                Key: <br>
+                <textarea class="key" rows="1" cols="40"></textarea><br>
+                Plain Text: <br>
+                <textarea class="text" rows="8" cols="50"></textarea><br><br>
             </form>
-            <button onclick="encryptText()">Encrypt</button>
+            <button onclick="encryptText()"><b>Encrypt</b></button>
             <p>Cipher text:</p>
             <p id="encrypt_result"></p>
         </div>
@@ -20,10 +23,12 @@
         <div>
             <h2>Decrypt Text</h2>
             <form id="decrypt_data">
-                Key: <input type="text"><br>
-                Text: <input type="text"><br>
+                Key: <br>
+                <textarea class="key" rows="1" cols="40"></textarea><br>
+                Cipher Text: <br>
+                <textarea class="text" rows="8" cols="50"></textarea><br><br>
             </form>
-            <button onclick="decryptText()">Decrypt</button>
+            <button onclick="decryptText()"><b>Decrypt</b></button>
             <p>Plain text:</p>
             <p id="decrypt_result"></p>
         </div>
