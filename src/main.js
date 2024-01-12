@@ -57,30 +57,30 @@ function genMapping(key) {
 }
 
 
-function encryptText(plain_text, key) {
+function encryptText() {
     // input key -> conv to b26 -> gen mapping -> map letters
+    let data = document.getElementById("encrypt_data");
+    let plain_text = data.elements[1].value;
+    let key = BigInt(data.elements[0].value);
     let base26 = base10ToBase26(key);
     let mapping = genMapping(base26);
     let cipher_text = mapLetters(plain_text, mapping);
-    return cipher_text;
+    document.getElementById("encrypt_result").innerHTML = cipher_text;
 };
 
 
-function decryptText(cipher_text, key) {
+function decryptText() {
     // input key -> conv to b26 -> gen mapping -> invert mapping -> map letters
+    let data = document.getElementById("decrypt_data");
+    let cipher_text = data.elements[1].value;
+    let key = BigInt(data.elements[0].value);
     let base26 = base10ToBase26(key);
     let mapping = genMapping(base26);
     mapping = invertDictionary(mapping);
     let plain_text = mapLetters(cipher_text, mapping);
-    return plain_text;
+    document.getElementById("decrypt_result").innerHTML = plain_text;
 };
 
 
 const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const shifts = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
-
-let message = "This is a secret!";
-let key = BigInt("6156119580207157310796674288400203775");
-let result = encryptText(message, key);
-console.log(result);
-console.log(decryptText(result, key));
