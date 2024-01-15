@@ -7,7 +7,7 @@
     </head>
     <body>
         <script type = "text/javascript" src="main.js"></script>
-        <div>
+        <div> <!-- Encrypting text -->
             <h2>Encrypt Text</h2>
             <form id="encrypt_data">
                 Key: <br>
@@ -20,7 +20,7 @@
             <p id="encrypt_result"></p>
         </div>
 
-        <div>
+        <div> <!-- Decrypting text -->
             <h2>Decrypt Text</h2>
             <form id="decrypt_data">
                 Key: <br>
@@ -31,6 +31,16 @@
             <button onclick="decryptText()"><b>Decrypt</b></button>
             <p>Plain text:</p>
             <p id="decrypt_result"></p>
+        </div>
+
+        <div> <!-- Validating keys -->
+            <h2>Validate Keys</h2>
+            <form id="validate_keys">
+                Key: <br>
+                <textarea class="key" rows="1" cols="40"></textarea><br>
+            </form>
+            <button onclick="validateKey()"><b>Check</b></button>
+            <p id="letter_mapping"></p>
         </div>
     </body>
 </html>
