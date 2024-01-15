@@ -109,7 +109,7 @@ function testKey(base26) {
 };
 
 
-function generateKey() {
+function generateRandomKey() {
     let key = "";
     let new_positions = new Set();
     let count = 0;
