@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v1.2.0 [2024-01-15]
+### New Features
+- Random keys can be generated
+
+### Other Changes
+- Improved formatting for letter mapping
+
 ## v1.1.0 [2024-01-15]
 ### New Features
 - Check mapping of keys

@@ -40,7 +40,16 @@
                 <textarea class="key" rows="1" cols="40"></textarea><br>
             </form>
             <button onclick="validateKey()"><b>Check</b></button>
-            <p id="letter_mapping"></p>
+            <p class="mapping">Decrypted: A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z</p>
+            <p class="mapping" id="letter_mapping">Encrypted: </p>
+        </div>
+
+        <div> <!-- Generating keys -->
+            <h2>Generate Keys</h2>
+            <h3>Random Key</h3>
+            <button onclick="generateKey()"><b>Generate</b></button>
+            <p>Key:</p>
+            <p id="random_key"></p>
         </div>
     </body>
 </html>

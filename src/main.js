@@ -45,11 +45,11 @@ function mapLetters(message, mapping) {
 };
 
 
-function genMapping(key) {
+function generateMapping(base26) {
     let mapping = {};
     for (let i = 0; i < 26; i++) {
         let char = letters[i];
-        let shift = base26_digits.indexOf(key[i]);
+        let shift = base26_digits.indexOf(base26[i]);
         let mapped_char = letters[(i + shift) % 26];
         mapping[char] = mapped_char;
     };
@@ -63,7 +63,7 @@ function encryptText() {
     let plain_text = data.elements[1].value;
     let key = BigInt(data.elements[0].value);
     let base26 = base10ToBase26(key);
-    let mapping = genMapping(base26);
+    let mapping = generateMapping(base26);
     let cipher_text = mapLetters(plain_text, mapping);
     document.getElementById("encrypt_result").innerHTML = cipher_text;
 };
@@ -75,7 +75,7 @@ function decryptText() {
     let cipher_text = data.elements[1].value;
     let key = BigInt(data.elements[0].value);
     let base26 = base10ToBase26(key);
-    let mapping = genMapping(base26);
+    let mapping = generateMapping(base26);
     mapping = invertDictionary(mapping);
     let plain_text = mapLetters(cipher_text, mapping);
     document.getElementById("decrypt_result").innerHTML = plain_text;
@@ -85,16 +85,11 @@ function decryptText() {
 function validateKey() {
     let data = document.getElementById("validate_keys");
     let key = BigInt(data.elements[0].value);
-//    let key = BigInt("6156119580207157310796674288400203775");
     let base26 = base10ToBase26(key);
     let valid = testKey(base26);
     if (valid == true) {
-        let mapping = genMapping(base26);
-        let formatted_mapping = "";
-        for (char in mapping) {
-            formatted_mapping = formatted_mapping + char + " -> " + mapping[char] + "<br>";
-        };
-        document.getElementById("letter_mapping").innerHTML = formatted_mapping;
+        let mapping = generateMapping(base26);
+        document.getElementById("letter_mapping").innerHTML = "Encrypted: " + Object.values(mapping);
     };
 };
 
@@ -114,13 +109,24 @@ function testKey(base26) {
 };
 
 
+function generateKey() {
+    let key = "";
+    let new_positions = new Set();
+    let count = 0;
+    while (key.length < 26) {
+        let random_number = Math.floor(Math.random() * 26);
+        let character_shift = base26_digits[random_number];
+        let new_position = (base26_digits.indexOf(character_shift) + count) % 26;
+        if (new_positions.has(new_position) == false) {
+            key = key + character_shift;
+            new_positions.add(new_position);
+            count = count + 1;
+        };
+    };
+    key = base26ToBase10(key);
+    document.getElementById("random_key").innerHTML = key;
+};
+
+
 const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const base26_digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
-
-//let plain_text = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-//let key = BigInt("51");
-//let base26 = base10ToBase26(key);
-//let mapping = genMapping(base26);
-//let cipher_text = mapLetters(plain_text, mapping);
-//
-//validateKey();
