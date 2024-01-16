@@ -128,5 +128,34 @@ function generateRandomKey() {
 };
 
 
+function generateKey() {
+    let data = document.getElementById("generate_key");
+    let mapped_letters = data.elements[0].value.split(",");
+    let valid = validateMapping(mapped_letters);
+    if (valid == false) {  // If the mapping is not valid
+        document.getElementById("known_key").innerHTML = -1;
+    };
+    let base26 = "";
+    for (i = 0; i < 26; i++) {
+        let shift = (letters.indexOf(mapped_letters[i]) - i + 26) % 26;  // Calculates how many spaces right the letter is shifted
+        let digit = base26_digits[shift];  // Finds the base26 equivalent of shift
+        base26 = base26 + digit;  // Adds the next digit
+    };
+    let key = base26ToBase10(base26);
+    document.getElementById("known_key").innerHTML = key;
+//    return base26;  // Returns the base26 representation of the key
+};
+
+
+function validateMapping(mapped_letters) {
+    let letter_set = new Set(letters);  // Creates a set from the list letters
+    let mapping_set = new Set(mapped_letters)  // Creates a set from the list mapped_letters
+    const eqSet = (xs, ys) =>
+        xs.size === ys.size &&
+        [...xs].every((x) => ys.has(x));
+    return eqSet(letter_set, mapping_set) // Checks if the mapping contains 26 unique items
+};
+
+
 const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const base26_digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
