@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.2 [2024-01-17]
+### Other Changes
+- Updated formatting using Bootstrap
+
 ## v1.2.1 [2024-01-16]
 ### New Features
 - Generate key from letter mapping

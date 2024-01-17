@@ -1,66 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>Encryption</title>
+        <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
+        <title>Text Encryption</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
         <script type = "text/javascript" src="main.js"></script>
-        <div> <!-- Encrypting text -->
-            <h2>Encrypt Text</h2>
-            <form id="encrypt_data">
-                Key: <br>
-                <textarea class="key" rows="1" cols="40"></textarea><br>
-                Plain Text: <br>
-                <textarea class="text" rows="8" cols="50"></textarea><br><br>
-            </form>
-            <button onclick="encryptText()"><b>Encrypt</b></button>
-            <p>Cipher text:</p>
-            <p id="encrypt_result"></p>
-        </div>
 
-        <div> <!-- Decrypting text -->
-            <h2>Decrypt Text</h2>
-            <form id="decrypt_data">
-                Key: <br>
-                <textarea class="key" rows="1" cols="40"></textarea><br>
-                Cipher Text: <br>
-                <textarea class="text" rows="8" cols="50"></textarea><br><br>
-            </form>
-            <button onclick="decryptText()"><b>Decrypt</b></button>
-            <p>Plain text:</p>
-            <p id="decrypt_result"></p>
-        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <h1 class="text-center"><u>Text</u></h1>
+                <div class="col-lg-6">
+                    <h2>Encrypt Text</h2>
+                    <form id="encrypt_data">
+                        Key: <br>
+                        <textarea rows="1" cols="40"></textarea><br>
+                        Plain Text: <br>
+                        <textarea rows="8" cols="50"></textarea><br><br>
+                    </form>
+                    <button onclick="encryptText()"><b>Encrypt</b></button>
+                    <p>Cipher text:</p>
+                    <p id="encrypt_result"></p>
+                </div>
 
-        <div> <!-- Validating keys -->
-            <h2>Validate Keys</h2>
-            <form id="validate_keys">
-                Key: <br>
-                <textarea class="key" rows="1" cols="40"></textarea><br>
-            </form>
-            <button onclick="validateKey()"><b>Check</b></button>
-            <p class="mapping">Decrypted: A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z</p>
-            <p class="mapping" id="letter_mapping">Encrypted: </p>
-        </div>
+                <div class="col-lg-6">
+                    <h2>Decrypt Text</h2>
+                    <form id="decrypt_data">
+                        Key: <br>
+                        <textarea rows="1" cols="40"></textarea><br>
+                        Cipher Text: <br>
+                        <textarea rows="8" cols="50"></textarea><br><br>
+                    </form>
+                    <button onclick="decryptText()"><b>Decrypt</b></button>
+                    <p>Plain text:</p>
+                    <p id="decrypt_result"></p>
+                </div>
 
-        <div> <!-- Generating keys -->
-            <h2>Generate Keys</h2>
-            <h3>Random Key</h3>
-            <button onclick="generateRandomKey()"><b>Generate</b></button>
-            <p>Key:</p>
-            <p id="random_key"></p>
+            </div>
+            <br><br>
+            <div class="row">
+                <h1 class="text-center"><u>Keys</u></h1>
+                <div class="col-lg-6">
+                    <h2>Validate Keys</h2>
+                    <form id="validate_keys">
+                        Key: <br>
+                        <textarea rows="1" cols="40"></textarea><br>
+                    </form>
+                    <button onclick="validateKey()"><b>Check</b></button>
+                    <p class="mapping">Decrypted: A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z</p>
+                    <p class="mapping" id="letter_mapping">Encrypted: </p>
+                </div>
 
-            <h3>Known Mapping</h3>
-            <p>Enter the mapping in the following format: <br>
-                <i>D,E,V,L,J,B,Z,S,X,C,Q,M,G,N,I,F,R,W,T,A,U,P,H,O,Y,K</i><br>
-                where A maps to D, B maps to E, etc.
-            </p>
-            <form id="generate_key">
-                <textarea></textarea><br>
-            </form>
-            <button onclick="generateKey()">Generate</button>
-            <p id="known_key"></p>
+                <div class="col-lg-6">
+                    <h2>Generate Keys</h2>
+                    <h3>Random Key</h3>
+                    <button onclick="generateRandomKey()"><b>Generate</b></button>
+                    <p>Key:</p>
+                    <p id="random_key"> </p>
+
+                    <h3>Known Mapping</h3>
+                    <p>Enter the mapping in the following format: <br>
+                        <i>D,E,V,L,J,B,Z,S,X,C,Q,M,G,N,I,F,R,W,T,A,U,P,H,O,Y,K</i><br>
+                        where A maps to D, B maps to E, etc.
+                    </p>
+                    <form id="generate_key">
+                        <textarea rows="1" cols="44"></textarea><br>
+                    </form>
+                    <button onclick="generateKey()"><b>Generate</b></button>
+                    <p>Key:</p>
+                    <p id="known_key"> </p>
+                </div>
+            </div>
         </div>
     </body>
 </html>
