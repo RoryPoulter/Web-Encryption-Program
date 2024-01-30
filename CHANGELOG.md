@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v1.2.3 [2024-01-30]
+### New Features
+- Encrypted .txt files can be decrypted
+
 ## v1.2.2 [2024-01-17]
 ### Other Changes
 - Updated formatting using Bootstrap
