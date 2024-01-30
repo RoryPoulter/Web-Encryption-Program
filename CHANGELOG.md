@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v1.2.3 [2024-01-30]
+## v1.3.0 [2024-01-30]
 ### New Features
 - Encrypted .txt files can be decrypted
 
