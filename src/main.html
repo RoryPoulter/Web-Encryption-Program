@@ -75,6 +75,24 @@
                     <p id="known_key"> </p>
                 </div>
             </div>
+            <br><br>
+            <div class="row">
+                <h1 class="text-center">Files</h1>
+                <div class="col-lg-6">
+                    <h2>Encrypt File</h2>
+                    <input type="file" name="inputfile" id="encrypt_file"><br>
+                    <form id="encrypt_file_key">
+                        Key: <br>
+                        <textarea rows="1" cols="40"></textarea><br>
+                    </form>
+                    <button onclick="encryptFile()"><b>Encrypt</b></button>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Decrypt File</h2>
+                    <input type="file" name="inputfile" id="decrypt_file"><br>
+                    <button onclick="decryptFile()"><b>Encrypt</b></button>
+                </div>
+            </div>
         </div>
     </body>
 </html>
