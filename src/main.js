@@ -169,5 +169,40 @@ function validateMapping(mapped_letters) {
 };
 
 
+function encryptFile() {
+
+};
+
+
+function decryptFile() {
+    document.getElementById('decrypt_file')
+        .addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function () {
+                const content = reader.result;
+                let key = new Key(BigInt(content.split('\n').shift()));
+                let decrypted_text = key.mapLetters(content, "decrypt");
+                let decrypted_file_name = key.mapLetters(reader.fileName, "decrypt").slice(0, -4);
+                const link = document.createElement("a");
+
+                const file = new Blob([decrypted_text], { type: 'text/plain' });
+                link.href = URL.createObjectURL(file);
+                link.download = decrypted_file_name + ".txt";
+                link.click();
+                URL.revokeObjectURL(link.href);
+            };
+
+            reader.onerror = function () {
+                console.error('Error reading the file');
+            };
+            reader.fileName = file.name;
+
+            reader.readAsText(file, 'utf-8');
+        });
+};
+
+
 const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 const base26_digits = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
