@@ -1,3 +1,48 @@
+class Key {
+    constructor(base10) {
+        this.base10 = base10;
+        this.base26 = base10ToBase26(base10);
+        this.forward_mapping = this.generateMapping(this.base26)  // plain text --> cipher text
+        this.backward_mapping = invertDictionary(this.forward_mapping)  // cipher text --> plain text
+    }
+
+    generateMapping(base26) {
+        let mapping = {};
+        for (let i = 0; i < 26; i++) {
+            let char = letters[i];
+            let shift = base26_digits.indexOf(base26[i]);
+            let mapped_char = letters[(i + shift) % 26];
+            mapping[char] = mapped_char;
+        };
+        return mapping;
+    }
+
+    mapLetters(text, mode) {
+        let start = text.toUpperCase();
+        let result = "";
+        if (mode == "encrypt") {
+            for (const char of start) {
+                if (char in this.forward_mapping) {
+                    result = result + this.forward_mapping[char];
+                } else {
+                    result = result + char;
+                };
+            };
+        }
+        else if (mode == "decrypt") {
+            for (const char of start) {
+                if (char in this.backward_mapping) {
+                    result = result + this.backward_mapping[char];
+                } else {
+                    result = result + char;
+                };
+            };
+        }
+        return result
+    }
+}
+
+
 function invertDictionary(dic) {
     let new_dic = {};
     for (const key in dic) {
@@ -31,40 +76,12 @@ function base10ToBase26(base10) {
 };
 
 
-function mapLetters(message, mapping) {
-    let start = message.toUpperCase();
-    let result = "";
-    for (const char of start) {
-        if (char in mapping) {
-            result = result + mapping[char];
-        } else {
-            result = result + char;
-        };
-    };
-    return result
-};
-
-
-function generateMapping(base26) {
-    let mapping = {};
-    for (let i = 0; i < 26; i++) {
-        let char = letters[i];
-        let shift = base26_digits.indexOf(base26[i]);
-        let mapped_char = letters[(i + shift) % 26];
-        mapping[char] = mapped_char;
-    };
-    return mapping;
-}
-
-
 function encryptText() {
     // input key -> conv to b26 -> gen mapping -> map letters
     let data = document.getElementById("encrypt_data");
     let plain_text = data.elements[1].value;
-    let key = BigInt(data.elements[0].value);
-    let base26 = base10ToBase26(key);
-    let mapping = generateMapping(base26);
-    let cipher_text = mapLetters(plain_text, mapping);
+    let key = new Key(BigInt(data.elements[0].value));
+    let cipher_text = key.mapLetters(plain_text, "encrypt");
     document.getElementById("encrypt_result").innerHTML = cipher_text;
 };
 
@@ -73,23 +90,18 @@ function decryptText() {
     // input key -> conv to b26 -> gen mapping -> invert mapping -> map letters
     let data = document.getElementById("decrypt_data");
     let cipher_text = data.elements[1].value;
-    let key = BigInt(data.elements[0].value);
-    let base26 = base10ToBase26(key);
-    let mapping = generateMapping(base26);
-    mapping = invertDictionary(mapping);
-    let plain_text = mapLetters(cipher_text, mapping);
+    let key = new Key(BigInt(data.elements[0].value));
+    let plain_text = key.mapLetters(cipher_text, "decrypt");
     document.getElementById("decrypt_result").innerHTML = plain_text;
 };
 
 
 function validateKey() {
     let data = document.getElementById("validate_keys");
-    let key = BigInt(data.elements[0].value);
-    let base26 = base10ToBase26(key);
-    let valid = testKey(base26);
+    let key = new Key(BigInt(data.elements[0].value));
+    let valid = testKey(key.base26);
     if (valid == true) {
-        let mapping = generateMapping(base26);
-        document.getElementById("letter_mapping").innerHTML = "Encrypted: " + Object.values(mapping);
+        document.getElementById("letter_mapping").innerHTML = "Encrypted: " + Object.values(key.forward_mapping);
     };
 };
 
