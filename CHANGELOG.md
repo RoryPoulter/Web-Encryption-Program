@@ -4,6 +4,7 @@
 - Removed file encryption/decryption
 - Changed colour scheme
 - Changed page layout
+- Deployed to Git Pages
 
 ## v1.3.0 [2024-01-30]
 ### New Features
