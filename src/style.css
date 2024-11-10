@@ -3,39 +3,48 @@
 #161616
 #AA0000
 */
-body {
-    background-color: #222222;
-    font-family: Verdana;
-    color: #FFFFFF;
-    font-size: 14pt;
-}
 
 textarea {
-    background-color: #161616;
-    color: #FFFFFF;
-    font-family: Verdana;
     resize: none;
 }
 
 button {
-    background-color: #AA0000;
-    color: #FFFFFF;
-    font-family: Verdana;
-    border-radius: 8px;
+    background-color: lightgray;
     width: 150px;
     height: 55px;
-    border: red;
 }
 
 button:hover {
-    background-color: #CC0000;
+    background-color: darkgray;
 }
 
 button:active {
-    background-color: #AA0000;
+    background-color: lightgray;
 }
 
 p.mapping {
     font-family: Courier;
     font-size: 14pt;
+}
+
+i.fa {
+    font-size: 32px;
+}
+
+i.fa-linkedin {
+    color: #0077B5;
+}
+
+i.fa-github {
+    color: black;
+}
+
+div.footer {
+    background-color: lightgray;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+div.row {
+    padding-left: 20px;
 }
