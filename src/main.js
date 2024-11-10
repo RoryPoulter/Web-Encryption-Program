@@ -77,7 +77,7 @@ function base10ToBase26(base10) {
 
 
 function encryptText() {
-    // input key -> conv to b26 -> gen mapping -> map letters
+    // input key -> convert to b26 -> gen mapping -> map letters
     let data = document.getElementById("encrypt_data");
     let plain_text = data.elements[1].value;
     let key = new Key(BigInt(data.elements[0].value));
@@ -87,7 +87,7 @@ function encryptText() {
 
 
 function decryptText() {
-    // input key -> conv to b26 -> gen mapping -> invert mapping -> map letters
+    // input key -> convert to b26 -> gen mapping -> invert mapping -> map letters
     let data = document.getElementById("decrypt_data");
     let cipher_text = data.elements[1].value;
     let key = new Key(BigInt(data.elements[0].value));
