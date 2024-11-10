@@ -31,6 +31,10 @@ i.fa {
     font-size: 32px;
 }
 
+i.fa:hover {
+    color: white;
+}
+
 i.fa-linkedin {
     color: #0077B5;
 }

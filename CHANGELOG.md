@@ -1,4 +1,9 @@
 # CHANGELOG
+## v1.4.0 [2024-11-10]
+### Other Changes
+- Removed file encryption/decryption
+- Changed colour scheme
+- Changed page layout
 
 ## v1.3.0 [2024-01-30]
 ### New Features
