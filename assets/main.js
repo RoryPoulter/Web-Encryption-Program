@@ -1,4 +1,11 @@
+/**
+ * Key class used to encrypt / decrypt text by generating a letter mapping
+ */
 class Key {
+    /**
+     * Constructor method
+     * @param {BigInt} base10 The decimal representation of the key
+     */
     constructor(base10) {
         this.base10 = base10;
         this.base26 = base10ToBase26(base10);
@@ -6,6 +13,11 @@ class Key {
         this.backward_mapping = invertDictionary(this.forward_mapping)  // cipher text --> plain text
     }
 
+    /**
+     * Generates a dictionary with key:value pairs for the original and mapped letters
+     * @param {String} base26 The base-26 representation of the key
+     * @returns {Object} The forward mapping of the letters
+     */
     generateMapping(base26) {
         let mapping = {};
         for (let i = 0; i < 26; i++) {
@@ -17,6 +29,12 @@ class Key {
         return mapping;
     }
 
+    /**
+     * Takes a text input and uses the forward / backward mapping depending on the mode
+     * @param {String} text The text to be encrypted / decrypted
+     * @param {String} mode If the text is to be encrypted or decrypted; discrete values of `'encrypt'` or `'decrypt'`
+     * @returns {String} The mapped text
+     */
     mapLetters(text, mode) {
         let start = text.toUpperCase();
         let result = "";
@@ -43,6 +61,11 @@ class Key {
 }
 
 
+/**
+ * Swaps the key-value pairs in a dictionary
+ * @param {Object} dic The original dictionary
+ * @returns {Object} The inverted dictionary
+ */
 function invertDictionary(dic) {
     let new_dic = {};
     for (const key in dic) {
@@ -52,6 +75,11 @@ function invertDictionary(dic) {
 };
 
 
+/**
+ * Converts a base-26 number to decimal
+ * @param {String} base26 The base-26 representation of the number
+ * @returns {BigInt} The decimal representation of the number
+ */
 function base26ToBase10(base26) {
     let base10 = BigInt("0");
     for (let i = 0; i < base26.length; i++) {
@@ -64,6 +92,11 @@ function base26ToBase10(base26) {
 };
 
 
+/**
+ * Converts a decimal number to base-26
+ * @param {BigInt} base10 The decimal representation of the number
+ * @returns {String} The base-26 representation of the number
+ */
 function base10ToBase26(base10) {
     let base26 = "";
     for (let i = 25; i >= 0; i--) {
@@ -76,6 +109,9 @@ function base10ToBase26(base10) {
 };
 
 
+/**
+ * Encrypts a text input using a key input and displays the cipher text in the DOM
+ */
 function encryptText() {
     // input key -> convert to b26 -> gen mapping -> map letters
     let data = document.getElementById("encrypt_data");
@@ -86,6 +122,9 @@ function encryptText() {
 };
 
 
+/**
+ * Decrypts a text input using a key input and displays the plain text in the DOM
+ */
 function decryptText() {
     // input key -> convert to b26 -> gen mapping -> invert mapping -> map letters
     let data = document.getElementById("decrypt_data");
@@ -96,16 +135,28 @@ function decryptText() {
 };
 
 
+/**
+ * Checks if a key is valid and outputs the result.
+ *  If valid, outputs the letter mapping
+ *  If invalid, alerts the user
+ */
 function validateKey() {
     let data = document.getElementById("validate_keys");
     let key = new Key(BigInt(data.elements[0].value));
     let valid = testKey(key.base26);
     if (valid == true) {
         document.getElementById("letter_mapping").innerHTML = "Encrypted: " + Object.values(key.forward_mapping);
+    } else{
+        alert("Key is invalid")
     };
 };
 
 
+/**
+ * Checks if the key maps each letter to a unique letter
+ * @param {String} base26 The base-26 representation of the key
+ * @returns {Boolean} If the key is valid
+ */
 function testKey(base26) {
     let new_positions = new Set();
 
@@ -121,6 +172,9 @@ function testKey(base26) {
 };
 
 
+/**
+ * Generates a random, valid key and outputs to the DOM
+ */
 function generateRandomKey() {
     let key = "";
     let new_positions = new Set();
@@ -140,6 +194,10 @@ function generateRandomKey() {
 };
 
 
+/**
+ * Generates a key from a mapping input.
+ * Mapping input in the form: A,B,C,...,X,Y,Z
+ */
 function generateKey() {
     let data = document.getElementById("generate_key");
     let mapped_letters = data.elements[0].value.split(",");
@@ -159,6 +217,11 @@ function generateKey() {
 };
 
 
+/**
+ * checks if a mapping is valid
+ * @param {Array} mapped_letters The mapping input
+ * @returns {Boolean} If the mapping is valid
+ */
 function validateMapping(mapped_letters) {
     let letter_set = new Set(letters);  // Creates a set from the list letters
     let mapping_set = new Set(mapped_letters)  // Creates a set from the list mapped_letters
