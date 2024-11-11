@@ -117,8 +117,14 @@ function encryptText() {
     let data = document.getElementById("encrypt_data");
     let plain_text = data.elements[1].value;
     let key = new Key(BigInt(data.elements[0].value));
-    let cipher_text = key.mapLetters(plain_text, "encrypt");
-    document.getElementById("encrypt_result").innerHTML = cipher_text;
+    // Check if the key is valid
+    let valid = testKey(key.base26);
+    if (valid == true) {
+        let cipher_text = key.mapLetters(plain_text, "encrypt");
+        document.getElementById("encrypt_result").innerHTML = cipher_text;
+    } else {
+        alert("Key is invalid")
+    };
 };
 
 
@@ -130,8 +136,15 @@ function decryptText() {
     let data = document.getElementById("decrypt_data");
     let cipher_text = data.elements[1].value;
     let key = new Key(BigInt(data.elements[0].value));
-    let plain_text = key.mapLetters(cipher_text, "decrypt");
-    document.getElementById("decrypt_result").innerHTML = plain_text;
+    let valid = testKey(key.base26);
+    // Check if the key is valid
+    if (valid == true) {
+        let plain_text = key.mapLetters(cipher_text, "decrypt");
+        document.getElementById("decrypt_result").innerHTML = plain_text;
+    } else {
+        alert("Key is invalid");
+    };
+    
 };
 
 
